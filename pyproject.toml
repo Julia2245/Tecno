@@ -1,0 +1,13 @@
+[project]
+name = "telegram-bot-core"
+version = "0.1.0"
+description = "Reusable asynchronous Telegram bot core"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
