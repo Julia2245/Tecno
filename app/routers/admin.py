@@ -39,6 +39,6 @@ async def admin_status(callback: CallbackQuery, settings: Settings, db: Database
         callback,
         "📊 <b>حالة النواة</b>\n\n"
         f"Telegram: ✅\nPostgreSQL: {'✅' if db_ok else '❌'}\n"
-        "Financial modules: غير مفعلة بعد",
+        "Wallet Core: ✅ مفعّل (بدون واجهة مالية بعد)",
         reply_markup=admin_menu(),
     )

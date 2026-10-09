@@ -15,8 +15,10 @@ from app.core.logging import configure_logging
 from app.middlewares.callback_ack import FastCallbackAckMiddleware
 from app.middlewares.latency import UpdateLatencyMiddleware
 from app.repositories.users import UserRepository
+from app.repositories.wallet import WalletRepository
 from app.routers import build_root_router
 from app.services.users import UserService
+from app.services.wallet import WalletService
 
 logger = logging.getLogger(__name__)
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
@@ -53,6 +55,8 @@ async def run() -> None:
 
     user_repository = UserRepository(db)
     user_service = UserService(user_repository)
+    wallet_repository = WalletRepository(db)
+    wallet_service = WalletService(wallet_repository)
 
     try:
         me = await bot.get_me()
@@ -68,6 +72,7 @@ async def run() -> None:
             settings=settings,
             db=db,
             user_service=user_service,
+            wallet_service=wallet_service,
             allowed_updates=dp.resolve_used_update_types(),
             tasks_concurrency_limit=settings.max_concurrent_updates,
             close_bot_session=False,
